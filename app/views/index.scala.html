@@ -2,20 +2,33 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Downloading a File With Scala Future Example</title>
+        <title>Image Downloader With Scala Future Example</title>
+        <link rel="stylesheet" href='@routes.Assets.at("stylesheets/bootstrap.min.css")'>
         <link rel="stylesheet" href='@routes.Assets.at("stylesheets/index.css")'/>
     </head>
     <body>
         <div class="centered-table">
             <div class="centered">
-                <h1>Welcome!</h1>
-                <form action="@routes.Application.download" method="POST">
-                    <h3>You can download jpg, png and gif images with this.</h3>
-                    <input type="text" name="url" placeholder="Enter image URL here"/><input type="submit" value="Download!"/>
-                </form>
-                @if(imageSource != "") {
-                <p><img class="downloaded-image" src="@routes.Assets.at("images/" + imageSource)" alt="Downloaded Image"/></p>
-                }
+                <div class="container">
+                    <h1>Welcome!</h1>
+                    <form action="@routes.Application.download" method="POST">
+                        <h3>You can download jpg images and show below.</h3>
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3">
+                                <div class="input-group">
+                                    <input class="form-control" type="text" name="url" placeholder="Enter image URL here">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit">Download!</button>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    @if(imageSource != "") {
+                    <h2>Downloaded Image</h2>
+                    <p><img class="downloaded-image" src="@routes.Assets.at("images/" + imageSource)" alt="Downloaded Image"/></p>
+                    }
+                </div>
             </div>
         </div>
     </body>
