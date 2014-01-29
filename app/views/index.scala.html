@@ -1,0 +1,21 @@
+@(imageSource: String)
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Downloading a File With Scala Future Example</title>
+        <link rel="stylesheet" href='@routes.Assets.at("stylesheets/index.css")'/>
+    </head>
+    <body>
+        <div class="centered-table">
+            <div class="centered">
+                <form action="@routes.Application.download" method="POST">
+                    <h3>You can download jpg, png and gif images with this.</h3>
+                    <input type="text" name="url" placeholder="Enter image URL here"/><input type="submit" value="Download!"/>
+                </form>
+                @if(imageSource != "") {
+                <p><img class="downloaded-image" src="@routes.Assets.at("images/" + imageSource)" alt="Downloaded Image"/></p>
+                }
+            </div>
+        </div>
+    </body>
+</html>
