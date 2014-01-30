@@ -1,35 +1,11 @@
-@(imageSource: String)
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Image Downloader With Scala Future Example</title>
-        <link rel="stylesheet" href='@routes.Assets.at("stylesheets/bootstrap.min.css")'>
-        <link rel="stylesheet" href='@routes.Assets.at("stylesheets/index.css")'/>
-    </head>
-    <body>
-        <div class="centered-table">
-            <div class="centered">
-                <div class="container">
-                    <h1>Welcome!</h1>
-                    <form action="@routes.Application.download" method="POST">
-                        <h3>You can download jpg images and show below.</h3>
-                        <div class="row">
-                            <div class="col-md-6 col-md-offset-3">
-                                <div class="input-group">
-                                    <input class="form-control" type="text" name="url" placeholder="Enter image URL here">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="submit">Download!</button>
-                                </span>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    @if(imageSource != "") {
-                    <h2>Downloaded Image</h2>
-                    <p><img class="downloaded-image" src="@routes.Assets.at("images/" + imageSource)" alt="Downloaded Image"/></p>
-                    }
-                </div>
-            </div>
+@main("Image Downloader/Uploader") {
+<div class="centered-table">
+    <div class="centered">
+        <div class="container">
+            <h1>Welcome to Image Downloader/Uploader!</h1>
+                <a class="btn btn-primary" href="@routes.Download.get">Download</a>
+                <a class="btn btn-success" href="@routes.Upload.get">Upload</a>
         </div>
-    </body>
-</html>
+    </div>
+</div>
+}
