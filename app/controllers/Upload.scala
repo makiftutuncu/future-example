@@ -31,14 +31,14 @@ object Upload extends Controller
    * Upload action that reads the file from user selection and runs uploading task
    */
   def upload = Action(parse.multipartFormData) {
-    implicit request => request.body.file("file").map {
-      picture =>
+    implicit request => request.body.file("file") match {
+      case Some(picture) =>
         picture.contentType match {
           case Some(contentType: String) =>
             if(contentType == "image/jpeg")
             {
               Logger.debug(s"Uploading ${picture.filename}...")
-              picture.ref.moveTo(new File(path + fileName))
+              picture.ref.moveTo(new File(path + fileName), true)
               Logger.debug("Successful!")
             }
             else Logger.debug("Failed! Only jpg images are supported.")
@@ -46,9 +46,10 @@ object Upload extends Controller
           case _ => Logger.debug("Failed! Only jpg images are supported.")
         }
         Redirect(routes.Upload.get())
-    }.getOrElse {
-      Logger.debug("Failed!")
-      Redirect(routes.Upload.get())
+
+      case _ =>
+        Logger.debug("Failed! Select a file.")
+        Redirect(routes.Upload.get())
     }
   }
 }
