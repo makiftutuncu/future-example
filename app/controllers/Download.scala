@@ -18,6 +18,16 @@ case class DownloadUrl(url: String)
 object Download extends Controller
 {
   /**
+   * Path to which the image will be saved
+   */
+  private val path: String = """public/images/"""
+
+  /**
+   * Name of the file to save the image
+   */
+  private val fileName: String = """downloaded.jpg"""
+
+  /**
    * A simple URL validation method for image links
    */
   def isValidUrl(url: String) =
@@ -33,16 +43,6 @@ object Download extends Controller
     mapping("url" -> nonEmptyText.verifying("Invalid image URL!", isValidUrl(_)))
       (DownloadUrl.apply)(DownloadUrl.unapply)
   )
-
-  /**
-   * Path to which the image will be downloaded
-   */
-  private val path: String = """public/images/"""
-
-  /**
-   * Name of the file to save the image
-   */
-  private val fileName: String = """image.jpg"""
 
   /**
    * Main action for rendering the page

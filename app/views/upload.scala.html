@@ -1,9 +1,10 @@
+@(imageSource: String)
 @main("Image Uploader") {
 <div class="centered-table">
     <div class="centered">
         <div class="container">
             <h1>Welcome!</h1>
-            <form action="@routes.Upload.upload" method="POST">
+            <form action="@routes.Upload.upload" method="POST" enctype="multipart/form-data">
                 <h3>You can upload jpg images and show below.</h3>
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
@@ -16,6 +17,11 @@
                     </div>
                 </div>
             </form>
+            @if(imageSource != "") {
+            <h2>Uploaded Image</h2>
+            <p><img class="downloaded-image" src="@routes.Assets.at("images/" + imageSource)" alt="Uploaded Image"/></p>
+            }
+            <p><a class="btn btn-info" href="@routes.Application.get">Go Back</a></p>
         </div>
     </div>
 </div>
