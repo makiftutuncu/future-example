@@ -8,10 +8,15 @@ GET     /                           controllers.Application.get
 # Download page
 GET     /download                   controllers.Download.get
 POST    /download                   controllers.Download.download
+POST    /downloadInternal           controllers.Download.downloadInternal
 
 # Upload page
 GET     /upload                     controllers.Upload.get
 POST    /upload                     controllers.Upload.upload
+
+# File transfer
+GET     /transfer                   controllers.Transfer.get
+POST    /transfer                   controllers.Transfer.transfer
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

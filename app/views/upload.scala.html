@@ -3,22 +3,22 @@
 <div class="centered-table">
     <div class="centered">
         <div class="container">
-            <form action="@routes.Upload.upload" method="POST" enctype="multipart/form-data">
-                <h3>You can upload jpg images and show below.</h3>
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
+            <h2>You can upload jpg images and show below.</h2>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <form action="@routes.Upload.upload" method="POST" enctype="multipart/form-data">
                         <div class="input-group">
                             <input class="form-control" type="file" name="file">
                             <span class="input-group-btn">
                                 <button class="btn btn-success" type="submit">Upload!</button>
                             </span>
                         </div>
-                    </div>
+                    </form>
                 </div>
-            </form>
+            </div>
             @if(imageSource != "") {
             <h2>Uploaded Image</h2>
-            <p><img class="downloaded-image" src="@routes.Assets.at("images/" + imageSource)" alt="Uploaded Image"/></p>
+            <p><img class="preview-image" src="@routes.Assets.at("images/" + imageSource)" alt="Uploaded Image"/></p>
             }
             <p><a class="btn btn-info" href="@routes.Application.get">Go Back</a></p>
         </div>

@@ -1,0 +1,16 @@
+@main("Image Transfer") {
+<div class="centered-table">
+    <div class="centered">
+        <div class="container">
+            <h2>This image will be transferred.</h2>
+            <p>
+                <form action="@routes.Transfer.transfer" method="POST">
+                    <button class="btn btn-warning" type="submit">Transfer!</button>
+                </form>
+            </p>
+            <p><img class="preview-image" src="@routes.Assets.at("images/transferred.jpg")" alt="Image to Transfer"/></p>
+            <p><a class="btn btn-info" href="@routes.Application.get">Go Back</a></p>
+        </div>
+    </div>
+</div>
+}

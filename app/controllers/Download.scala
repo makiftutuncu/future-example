@@ -9,6 +9,7 @@ import play.api.data.Form
 import play.api.data.Forms._
 import play.api.libs.ws.WS
 import play.api.libs.iteratee._
+import play.api.libs.Files
 
 /**
  * A tiny and utterly useless class for retrieving URL provided by the user
@@ -45,17 +46,6 @@ object Download extends Controller
   )
 
   /**
-   * Main action for rendering the page
-   */
-  def get = Action {
-    val file = new File(path + fileName)
-    if(file.exists)
-      Ok(views.html.download(file.getName))
-    else
-      Ok(views.html.download(""))
-  }
-
-  /**
    * Iteratee method to process stream
    */
   def fromStream(stream: OutputStream): Iteratee[Array[Byte], SimpleResult] = Cont {
@@ -72,6 +62,17 @@ object Download extends Controller
     case Input.Empty =>
       Logger.debug("Received empty input.")
       fromStream(stream)
+  }
+
+  /**
+   * Main action for rendering the page
+   */
+  def get = Action {
+    val file = new File(path + fileName)
+    if(file.exists)
+      Ok(views.html.download(file.getName))
+    else
+      Ok(views.html.download(""))
   }
 
   /**
@@ -103,5 +104,17 @@ object Download extends Controller
         }
       }
     )
+  }
+
+  /**
+   * Download action that runs downloading task internally
+   */
+  def downloadInternal = Action(parse.temporaryFile) {
+    implicit request =>
+      Logger.debug("Starting to transfer...")
+      val fileName = """received.jpg"""
+      Files.moveFile(request.body.file, new File(path + fileName), true)
+      Logger.debug("Successful!")
+      Ok("Ok")
   }
 }
